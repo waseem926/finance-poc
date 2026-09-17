@@ -1,0 +1,23 @@
+package com.example.finance
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import dagger.hilt.android.AndroidEntryPoint
+import com.example.finance.core.ui.theme.AppTheme
+import com.example.finance.navigation.AppNavHost
+
+/** Root activity hosting the Compose navigation graph. */
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            AppTheme {
+                AppNavHost()
+            }
+        }
+    }
+}

@@ -1,0 +1,173 @@
+{
+  "app_name": "Finance POC",
+  "package_name": "com.example.finance",
+  "description": "Runnable Android POC with 3 screens: dashboard overview, expense list, and budgets. Clean Architecture + Compose. Fake data for demo.",
+  "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
+  "requirements": "Finance POC: Dashboard with spend summary, Transactions list, and Budgets list. Fake data is fine.",
+  "design": {
+    "primary": "#0F766E",
+    "on_primary": "#FFFFFF",
+    "secondary": "#0284C7",
+    "background": "#F0FDFA",
+    "surface": "#FFFFFF",
+    "on_surface": "#134E4A",
+    "error": "#DC2626",
+    "font_family": "Default",
+    "spacing_unit_dp": 8,
+    "corner_radius_dp": 16,
+    "notes": "Teal finance POC tokens inspired by Figma brand frame"
+  },
+  "modules": [
+    {
+      "path": "app",
+      "type": "app",
+      "purpose": "Shell + navigation"
+    },
+    {
+      "path": "core/common",
+      "type": "core",
+      "purpose": "Shared primitives"
+    },
+    {
+      "path": "core/network",
+      "type": "core",
+      "purpose": "Retrofit-ready"
+    },
+    {
+      "path": "core/database",
+      "type": "core",
+      "purpose": "Room-ready"
+    },
+    {
+      "path": "core/ui",
+      "type": "core",
+      "purpose": "Material 3 theme"
+    },
+    {
+      "path": "features/dashboard",
+      "type": "feature",
+      "purpose": "Home overview"
+    },
+    {
+      "path": "features/transactions",
+      "type": "feature",
+      "purpose": "Expense list"
+    },
+    {
+      "path": "features/budgets",
+      "type": "feature",
+      "purpose": "Budget list"
+    }
+  ],
+  "features": [
+    {
+      "name": "dashboard",
+      "description": "Overview of spend vs budget",
+      "screens": [
+        {
+          "name": "DashboardScreen",
+          "route": "dashboard",
+          "title": "Dashboard",
+          "purpose": "See totals and quick status",
+          "sample_items": [
+            "Spent this month: $1,240",
+            "Budget left: $760",
+            "Top category: Food",
+            "Coffee — $4.50",
+            "Groceries — $62.10",
+            "Metro — $2.75"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveDashboardUseCase",
+          "description": "Dashboard tiles",
+          "inputs": [],
+          "output": ""
+        }
+      ],
+      "repository": "DashboardRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "transactions",
+      "description": "Recent expenses",
+      "screens": [
+        {
+          "name": "TransactionsScreen",
+          "route": "transactions",
+          "title": "Transactions",
+          "purpose": "Browse recent expenses",
+          "sample_items": [
+            "Coffee — $4.50",
+            "Groceries — $62.10",
+            "Metro — $2.75"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveTransactionsUseCase",
+          "description": "Expense list",
+          "inputs": [],
+          "output": ""
+        }
+      ],
+      "repository": "TransactionRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "budgets",
+      "description": "Monthly budgets",
+      "screens": [
+        {
+          "name": "BudgetsScreen",
+          "route": "budgets",
+          "title": "Budgets",
+          "purpose": "Track category budgets",
+          "sample_items": [
+            "Food — $400",
+            "Transport — $120",
+            "Fun — $80"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveBudgetsUseCase",
+          "description": "Budget list",
+          "inputs": [],
+          "output": ""
+        }
+      ],
+      "repository": "BudgetRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    }
+  ],
+  "tech_decisions": {
+    "di": "Hilt",
+    "network": "Retrofit+OkHttp",
+    "db": "Room",
+    "ui": "Jetpack Compose+Material3",
+    "navigation": "Navigation Compose",
+    "async": "Coroutines+StateFlow"
+  },
+  "data_flow_mermaid": "flowchart LR\n  UI[Compose] --> VM[ViewModel]\n  VM --> UC[UseCase]\n  UC --> Repo[Repository]\n  Repo --> Fake[Fake local data]",
+  "optional_libraries": []
+}
