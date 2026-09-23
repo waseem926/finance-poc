@@ -1,0 +1,176 @@
+{
+  "app_name": "Splash Dashboard POC",
+  "package_name": "com.finance.poc",
+  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, show_it_for_3_sec).",
+  "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
+  "requirements": "Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+  "design": {
+    "primary": "#8B5CF6",
+    "on_primary": "#FFFFFF",
+    "secondary": "#8E51FF",
+    "background": "#FAFAFA",
+    "surface": "#F5F5F7",
+    "on_surface": "#0A0A0A",
+    "error": "#F59E0B",
+    "font_family": "Default",
+    "spacing_unit_dp": 8,
+    "corner_radius_dp": 16,
+    "notes": "Imported from Figma file_content"
+  },
+  "modules": [
+    {
+      "path": "app",
+      "type": "app",
+      "purpose": "Shell + navigation"
+    },
+    {
+      "path": "core/common",
+      "type": "core",
+      "purpose": "Shared primitives"
+    },
+    {
+      "path": "core/ui",
+      "type": "core",
+      "purpose": "Design system"
+    },
+    {
+      "path": "features/splash",
+      "type": "feature",
+      "purpose": "Splash screen from brief"
+    },
+    {
+      "path": "features/dashboard",
+      "type": "feature",
+      "purpose": "Dashboard screen from brief"
+    },
+    {
+      "path": "features/show_it_for_3_sec",
+      "type": "feature",
+      "purpose": "ShowItFor3Sec screen from brief"
+    }
+  ],
+  "features": [
+    {
+      "name": "splash",
+      "description": "Splash screen from brief",
+      "screens": [
+        {
+          "name": "SplashScreen",
+          "route": "splash",
+          "title": "Splash",
+          "purpose": "POC Splash experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "sample_items": [
+            "App logo",
+            "Loading…",
+            "Continue"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveSplashUseCase",
+          "description": "Load data for splash",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
+        }
+      ],
+      "repository": "SplashRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "dashboard",
+      "description": "Dashboard screen from brief",
+      "screens": [
+        {
+          "name": "DashboardScreen",
+          "route": "dashboard",
+          "title": "Dashboard",
+          "purpose": "POC Dashboard experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "sample_items": [
+            "Dashboard item 1",
+            "Dashboard item 2",
+            "Dashboard item 3"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveDashboardUseCase",
+          "description": "Load data for dashboard",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
+        }
+      ],
+      "repository": "DashboardRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "show_it_for_3_sec",
+      "description": "ShowItFor3Sec screen from brief",
+      "screens": [
+        {
+          "name": "ShowItFor3SecScreen",
+          "route": "show_it_for_3_sec",
+          "title": "ShowItFor3Sec",
+          "purpose": "POC ShowItFor3Sec experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "sample_items": [
+            "ShowItFor3Sec item 1",
+            "ShowItFor3Sec item 2",
+            "ShowItFor3Sec item 3"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveShowItFor3SecUseCase",
+          "description": "Load data for show_it_for_3_sec",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
+        }
+      ],
+      "repository": "ShowItFor3SecRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    }
+  ],
+  "tech_decisions": {
+    "di": "Hilt",
+    "ui": "Jetpack Compose+Material3",
+    "navigation": "Navigation Compose",
+    "async": "Coroutines+StateFlow",
+    "planning": "brief-driven (no LLM)"
+  },
+  "data_flow_mermaid": "flowchart LR\n  UI-->VM\n  VM-->UC\n  UC-->Repo\n  Repo-->Local",
+  "optional_libraries": [],
+  "integration": {
+    "mode": "greenfield",
+    "host_root": "",
+    "app_module": "app",
+    "compat": "green",
+    "compat_label": "",
+    "create_core_common": false,
+    "create_core_ui": false,
+    "create_version_catalog": false,
+    "patch_settings": false,
+    "patch_app_deps": false,
+    "write_poc_entry": false,
+    "conflict_features": [],
+    "files_to_create": [],
+    "files_to_patch": [],
+    "notes": []
+  }
+}
