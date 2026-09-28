@@ -1,9 +1,9 @@
 {
-  "app_name": "Splash Dashboard POC",
+  "app_name": "Splash Analytics POC",
   "package_name": "com.aifinance.poc",
-  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, expenses).",
+  "description": "Runnable Compose POC generated from your brief (2 screen(s): splash, analytics).",
   "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
-  "requirements": "AI Finance app , create , Splash screen show for 3 sex then create Dashboard , Expenses and Analytics screens with proper navigation",
+  "requirements": "AI Finance App with Splash screen for 3 sec , Add Expense Screen , Analytics Screen and History Screen with proper navigation",
   "design": {
     "primary": "#8B5CF6",
     "on_primary": "#FFFFFF",
@@ -39,14 +39,9 @@
       "purpose": "Splash screen from brief"
     },
     {
-      "path": "features/dashboard",
+      "path": "features/analytics",
       "type": "feature",
-      "purpose": "Dashboard screen from brief"
-    },
-    {
-      "path": "features/expenses",
-      "type": "feature",
-      "purpose": "Expenses screen from brief"
+      "purpose": "Analytics screen from brief"
     }
   ],
   "features": [
@@ -83,18 +78,18 @@
       "dependencies": []
     },
     {
-      "name": "dashboard",
-      "description": "Dashboard screen from brief",
+      "name": "analytics",
+      "description": "Analytics screen from brief",
       "screens": [
         {
-          "name": "DashboardScreen",
-          "route": "dashboard",
-          "title": "Dashboard",
-          "purpose": "POC Dashboard screen",
+          "name": "AnalyticsScreen",
+          "route": "analytics",
+          "title": "Analytics",
+          "purpose": "POC Analytics screen",
           "sample_items": [
-            "Dashboard item 1",
-            "Dashboard item 2",
-            "Dashboard item 3"
+            "Analytics item 1",
+            "Analytics item 2",
+            "Analytics item 3"
           ],
           "ui_state": {},
           "events": []
@@ -102,45 +97,13 @@
       ],
       "use_cases": [
         {
-          "name": "ObserveDashboardUseCase",
-          "description": "Load data for dashboard",
+          "name": "ObserveAnalyticsUseCase",
+          "description": "Load data for analytics",
           "inputs": [],
           "output": "Flow<Result<List<String>>>"
         }
       ],
-      "repository": "DashboardRepository",
-      "data_sources": [
-        "local"
-      ],
-      "dependencies": []
-    },
-    {
-      "name": "expenses",
-      "description": "Expenses screen from brief",
-      "screens": [
-        {
-          "name": "ExpensesScreen",
-          "route": "expenses",
-          "title": "Expenses",
-          "purpose": "POC Expenses screen",
-          "sample_items": [
-            "Expenses item 1",
-            "Expenses item 2",
-            "Expenses item 3"
-          ],
-          "ui_state": {},
-          "events": []
-        }
-      ],
-      "use_cases": [
-        {
-          "name": "ObserveExpensesUseCase",
-          "description": "Load data for expenses",
-          "inputs": [],
-          "output": "Flow<Result<List<String>>>"
-        }
-      ],
-      "repository": "ExpensesRepository",
+      "repository": "AnalyticsRepository",
       "data_sources": [
         "local"
       ],

@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "splash-dashboard-poc"
+rootProject.name = "splash-analytics-poc"
 include(
     ":app",
     ":core:common",
@@ -20,6 +20,5 @@ include(
     ":core:database",
     ":core:ui",
     ":features:splash",
-    ":features:dashboard",
-    ":features:expenses",
+    ":features:analytics",
 )

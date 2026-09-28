@@ -24,8 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import com.aifinance.poc.features.splash.presentation.SplashScreen
-import com.aifinance.poc.features.dashboard.presentation.DashboardScreen
-import com.aifinance.poc.features.expenses.presentation.ExpensesScreen
+import com.aifinance.poc.features.analytics.presentation.AnalyticsScreen
 
 private data class Dest(val route: String, val label: String, val icon: ImageVector)
 
@@ -34,8 +33,7 @@ private data class Dest(val route: String, val label: String, val icon: ImageVec
 fun AppNavHost() {
     val navController = rememberNavController()
     val tabDestinations = listOf(
-        Dest("dashboard", "Dashboard", Icons.Default.Home),
-        Dest("expenses", "Expenses", Icons.Default.List),
+        Dest("analytics", "Analytics", Icons.Default.Home),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -73,14 +71,13 @@ fun AppNavHost() {
             composable(route = "splash") {
                 LaunchedEffect(Unit) {
                     delay(3000)
-                    navController.navigate("dashboard") {
+                    navController.navigate("analytics") {
                         popUpTo("splash") { inclusive = true }
                     }
                 }
                 SplashScreen()
             }
-            composable(route = "dashboard") { DashboardScreen() }
-            composable(route = "expenses") { ExpensesScreen() }
+            composable(route = "analytics") { AnalyticsScreen() }
         }
     }
 }

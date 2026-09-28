@@ -44,8 +44,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:database"))
     implementation(project(":features:splash"))
-    implementation(project(":features:dashboard"))
-    implementation(project(":features:expenses"))
+    implementation(project(":features:analytics"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
