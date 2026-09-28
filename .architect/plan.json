@@ -1,9 +1,9 @@
 {
-  "app_name": "Splash Analytics POC",
+  "app_name": "Splash Expenses POC",
   "package_name": "com.aifinance.poc",
-  "description": "Runnable Compose POC generated from your brief (2 screen(s): splash, analytics).",
+  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, expenses, analytics).",
   "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
-  "requirements": "AI Finance App with Splash screen for 3 sec , Add Expense Screen , Analytics Screen and History Screen with proper navigation",
+  "requirements": "AI Finance App with Splash Screen for 3 sec , Add Expenses Screen  , Analytics Screen , History Screen and navigation in them",
   "design": {
     "primary": "#8B5CF6",
     "on_primary": "#FFFFFF",
@@ -39,6 +39,11 @@
       "purpose": "Splash screen from brief"
     },
     {
+      "path": "features/expenses",
+      "type": "feature",
+      "purpose": "Expenses screen from brief"
+    },
+    {
       "path": "features/analytics",
       "type": "feature",
       "purpose": "Analytics screen from brief"
@@ -72,6 +77,38 @@
         }
       ],
       "repository": "SplashRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "expenses",
+      "description": "Expenses screen from brief",
+      "screens": [
+        {
+          "name": "ExpensesScreen",
+          "route": "expenses",
+          "title": "Expenses",
+          "purpose": "POC Expenses screen",
+          "sample_items": [
+            "Expenses item 1",
+            "Expenses item 2",
+            "Expenses item 3"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveExpensesUseCase",
+          "description": "Load data for expenses",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
+        }
+      ],
+      "repository": "ExpensesRepository",
       "data_sources": [
         "local"
       ],

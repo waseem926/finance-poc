@@ -1,16 +1,18 @@
-# POC Architecture — Splash Analytics POC
+# POC Architecture — Splash Expenses POC
 
-Runnable Compose POC generated from your brief (2 screen(s): splash, analytics).
+Runnable Compose POC generated from your brief (3 screen(s): splash, expenses, analytics).
 
 **Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc
 
-**Requirements:** AI Finance App with Splash screen for 3 sec , Add Expense Screen , Analytics Screen and History Screen with proper navigation
+**Requirements:** AI Finance App with Splash Screen for 3 sec , Add Expenses Screen  , Analytics Screen , History Screen and navigation in them
 
 
 ## Screens (executed)
 
 
 - **Splash** (`splash`) — Splash screen from brief
+
+- **Expenses** (`expenses`) — Expenses screen from brief
 
 - **Analytics** (`analytics`) — Analytics screen from brief
 
@@ -34,6 +36,8 @@ Shared components live in `core:ui` (`PocTopBar`, `PocListCard`, loading/empty/e
 - `core/ui` (core) — Design system
 
 - `features/splash` (feature) — Splash screen from brief
+
+- `features/expenses` (feature) — Expenses screen from brief
 
 - `features/analytics` (feature) — Analytics screen from brief
 
