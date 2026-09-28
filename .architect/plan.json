@@ -1,9 +1,9 @@
 {
   "app_name": "Splash Dashboard POC",
-  "package_name": "com.finance.poc",
-  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, show_it_for_3_sec).",
+  "package_name": "com.aifinance.poc",
+  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, expenses).",
   "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
-  "requirements": "Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+  "requirements": "AI Finance app , create , Splash screen show for 3 sex then create Dashboard , Expenses and Analytics screens with proper navigation",
   "design": {
     "primary": "#8B5CF6",
     "on_primary": "#FFFFFF",
@@ -44,9 +44,9 @@
       "purpose": "Dashboard screen from brief"
     },
     {
-      "path": "features/show_it_for_3_sec",
+      "path": "features/expenses",
       "type": "feature",
-      "purpose": "ShowItFor3Sec screen from brief"
+      "purpose": "Expenses screen from brief"
     }
   ],
   "features": [
@@ -58,7 +58,7 @@
           "name": "SplashScreen",
           "route": "splash",
           "title": "Splash",
-          "purpose": "POC Splash experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "purpose": "POC Splash screen",
           "sample_items": [
             "App logo",
             "Loading…",
@@ -90,7 +90,7 @@
           "name": "DashboardScreen",
           "route": "dashboard",
           "title": "Dashboard",
-          "purpose": "POC Dashboard experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "purpose": "POC Dashboard screen",
           "sample_items": [
             "Dashboard item 1",
             "Dashboard item 2",
@@ -115,18 +115,18 @@
       "dependencies": []
     },
     {
-      "name": "show_it_for_3_sec",
-      "description": "ShowItFor3Sec screen from brief",
+      "name": "expenses",
+      "description": "Expenses screen from brief",
       "screens": [
         {
-          "name": "ShowItFor3SecScreen",
-          "route": "show_it_for_3_sec",
-          "title": "ShowItFor3Sec",
-          "purpose": "POC ShowItFor3Sec experience derived from: Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen",
+          "name": "ExpensesScreen",
+          "route": "expenses",
+          "title": "Expenses",
+          "purpose": "POC Expenses screen",
           "sample_items": [
-            "ShowItFor3Sec item 1",
-            "ShowItFor3Sec item 2",
-            "ShowItFor3Sec item 3"
+            "Expenses item 1",
+            "Expenses item 2",
+            "Expenses item 3"
           ],
           "ui_state": {},
           "events": []
@@ -134,13 +134,13 @@
       ],
       "use_cases": [
         {
-          "name": "ObserveShowItFor3SecUseCase",
-          "description": "Load data for show_it_for_3_sec",
+          "name": "ObserveExpensesUseCase",
+          "description": "Load data for expenses",
           "inputs": [],
           "output": "Flow<Result<List<String>>>"
         }
       ],
-      "repository": "ShowItFor3SecRepository",
+      "repository": "ExpensesRepository",
       "data_sources": [
         "local"
       ],
@@ -168,6 +168,7 @@
     "patch_settings": false,
     "patch_app_deps": false,
     "write_poc_entry": false,
+    "wire_nav_only": false,
     "conflict_features": [],
     "files_to_create": [],
     "files_to_patch": [],

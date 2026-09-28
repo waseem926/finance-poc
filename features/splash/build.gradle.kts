@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.finance.poc.features.splash"
+    namespace = "com.aifinance.poc.features.splash"
     compileSdk = 35
 
     defaultConfig {

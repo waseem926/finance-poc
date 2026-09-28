@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.finance.poc.core.ui"
+    namespace = "com.aifinance.poc.core.ui"
     compileSdk = 35
 
     defaultConfig {

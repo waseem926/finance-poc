@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.finance.poc.core.network"
+    namespace = "com.aifinance.poc.core.network"
     compileSdk = 35
 
     defaultConfig {

@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.finance.poc"
+    namespace = "com.aifinance.poc"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.finance.poc"
+        applicationId = "com.aifinance.poc"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -45,7 +45,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":features:splash"))
     implementation(project(":features:dashboard"))
-    implementation(project(":features:show_it_for_3_sec"))
+    implementation(project(":features:expenses"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

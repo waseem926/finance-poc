@@ -21,5 +21,5 @@ include(
     ":core:ui",
     ":features:splash",
     ":features:dashboard",
-    ":features:show_it_for_3_sec",
+    ":features:expenses",
 )

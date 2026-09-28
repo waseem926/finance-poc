@@ -1,10 +1,10 @@
 # POC Architecture — Splash Dashboard POC
 
-Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, show_it_for_3_sec).
+Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, expenses).
 
 **Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc
 
-**Requirements:** Finance app , Create a splash screen, show it for 3 sec , create a dashboard screen , analysis screen
+**Requirements:** AI Finance app , create , Splash screen show for 3 sex then create Dashboard , Expenses and Analytics screens with proper navigation
 
 
 ## Screens (executed)
@@ -14,7 +14,7 @@ Runnable Compose POC generated from your brief (3 screen(s): splash, dashboard, 
 
 - **Dashboard** (`dashboard`) — Dashboard screen from brief
 
-- **ShowItFor3Sec** (`show_it_for_3_sec`) — ShowItFor3Sec screen from brief
+- **Expenses** (`expenses`) — Expenses screen from brief
 
 
 ## Design system (V3)
@@ -39,7 +39,7 @@ Shared components live in `core:ui` (`PocTopBar`, `PocListCard`, loading/empty/e
 
 - `features/dashboard` (feature) — Dashboard screen from brief
 
-- `features/show_it_for_3_sec` (feature) — ShowItFor3Sec screen from brief
+- `features/expenses` (feature) — Expenses screen from brief
 
 
 ## Data flow

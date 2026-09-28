@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.finance.poc.features.dashboard"
+    namespace = "com.aifinance.poc.features.dashboard"
     compileSdk = 35
 
     defaultConfig {
