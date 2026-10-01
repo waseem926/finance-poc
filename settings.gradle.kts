@@ -12,14 +12,13 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "splash-expenses-poc"
+rootProject.name = "ai-finance-poc"
 include(
     ":app",
     ":core:common",
     ":core:network",
     ":core:database",
     ":core:ui",
-    ":features:splash",
-    ":features:expenses",
+    ":features:add_expense",
     ":features:analytics",
 )

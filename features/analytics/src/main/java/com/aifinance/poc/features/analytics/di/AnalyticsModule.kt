@@ -1,7 +1,7 @@
 package com.aifinance.poc.features.analytics.di
 
-import com.aifinance.poc.features.analytics.data.AnalyticsRepositoryImpl
-import com.aifinance.poc.features.analytics.domain.AnalyticsRepository
+import com.aifinance.poc.features.analytics.data.ExpenseRepositoryImpl
+import com.aifinance.poc.features.analytics.domain.ExpenseRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 abstract class AnalyticsModule {
     @Binds
     @Singleton
-    abstract fun bindAnalyticsRepository(
-        impl: AnalyticsRepositoryImpl,
-    ): AnalyticsRepository
+    abstract fun bindExpenseRepository(
+        impl: ExpenseRepositoryImpl,
+    ): ExpenseRepository
 }

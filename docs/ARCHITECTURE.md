@@ -1,20 +1,18 @@
-# POC Architecture — Splash Expenses POC
+# POC Architecture — AI Finance POC
 
-Runnable Compose POC generated from your brief (3 screen(s): splash, expenses, analytics).
+A two-screen expense POC: capture new spending on Add Expense and review totals and trends on Analytics, with Navigation Compose routes and tap handlers for submit, category pick, and chart or list drill-down. Uses local fake transactions aligned with the AI Personal Expense Assistant Figma flow.
 
-**Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc
+**Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/AI-Personal-Expense-Assistant?node-id=0-1&p=f&t=BXhIL10A7On3kmp3-0
 
-**Requirements:** AI Finance App with Splash Screen for 3 sec , Add Expenses Screen  , Analytics Screen , History Screen and navigation in them
+**Requirements:** Ai Finance App with AddExpense Screen , Analytics Screen and proper navigation in these two also handle click listeners as well
 
 
 ## Screens (executed)
 
 
-- **Splash** (`splash`) — Splash screen from brief
+- **Add Expense** (`add_expense`) — User enters amount, category, note, and date; Save persists locally and navigates or shows success; category chips and View Analytics link handle clicks.
 
-- **Expenses** (`expenses`) — Expenses screen from brief
-
-- **Analytics** (`analytics`) — Analytics screen from brief
+- **Analytics** (`analytics`) — Shows month total, category breakdown, and recent expenses; period and category row clicks filter or highlight slices.
 
 
 ## Design system (V3)
@@ -29,17 +27,19 @@ Shared components live in `core:ui` (`PocTopBar`, `PocListCard`, loading/empty/e
 ## Modules
 
 
-- `app` (app) — Shell + navigation
+- `app` (app) — Hilt application, NavHost, bottom or top-level graph linking Add Expense and Analytics
 
-- `core/common` (core) — Shared primitives
+- `core/common` (core) — Result types, dispatchers, date and money formatting
 
-- `core/ui` (core) — Design system
+- `core/network` (core) — Retrofit-ready stubs for future AI categorization API
 
-- `features/splash` (feature) — Splash screen from brief
+- `core/database` (core) — Room-ready placeholder; POC uses in-memory local source
 
-- `features/expenses` (feature) — Expenses screen from brief
+- `core/ui` (core) — Material 3 theme, spacing, ExpenseAmountField, CategoryChipRow, SummaryCard
 
-- `features/analytics` (feature) — Analytics screen from brief
+- `features/add_expense` (feature) — Expense entry form and save flow
+
+- `features/analytics` (feature) — Spending analytics and category breakdown
 
 
 ## Data flow
@@ -57,10 +57,12 @@ flowchart LR
 
 - **di:** Hilt
 
+- **network:** Retrofit+OkHttp
+
+- **db:** Room
+
 - **ui:** Jetpack Compose+Material3
 
 - **navigation:** Navigation Compose
 
 - **async:** Coroutines+StateFlow
-
-- **planning:** brief-driven (no LLM)

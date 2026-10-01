@@ -43,8 +43,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
-    implementation(project(":features:splash"))
-    implementation(project(":features:expenses"))
+    implementation(project(":features:add_expense"))
     implementation(project(":features:analytics"))
 
     implementation(libs.androidx.core.ktx)

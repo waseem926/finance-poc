@@ -23,8 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
-import com.aifinance.poc.features.splash.presentation.SplashScreen
-import com.aifinance.poc.features.expenses.presentation.ExpensesScreen
+import com.aifinance.poc.features.add_expense.presentation.AddExpenseScreen
 import com.aifinance.poc.features.analytics.presentation.AnalyticsScreen
 
 private data class Dest(val route: String, val label: String, val icon: ImageVector)
@@ -34,12 +33,12 @@ private data class Dest(val route: String, val label: String, val icon: ImageVec
 fun AppNavHost() {
     val navController = rememberNavController()
     val tabDestinations = listOf(
-        Dest("expenses", "Expenses", Icons.Default.Home),
+        Dest("add_expense", "Add Expense", Icons.Default.Home),
         Dest("analytics", "Analytics", Icons.Default.List),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val showBottomBar = tabDestinations.size > 1 && currentRoute != "splash"
+    val showBottomBar = tabDestinations.size > 1 && currentRoute != ""
 
     Scaffold(
         bottomBar = {
@@ -67,19 +66,10 @@ fun AppNavHost() {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = "splash",
+            startDestination = "add_expense",
             modifier = Modifier.padding(padding),
         ) {
-            composable(route = "splash") {
-                LaunchedEffect(Unit) {
-                    delay(3000)
-                    navController.navigate("expenses") {
-                        popUpTo("splash") { inclusive = true }
-                    }
-                }
-                SplashScreen()
-            }
-            composable(route = "expenses") { ExpensesScreen() }
+            composable(route = "add_expense") { AddExpenseScreen() }
             composable(route = "analytics") { AnalyticsScreen() }
         }
     }

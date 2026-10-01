@@ -51,12 +51,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.aifinance.poc.core.ui.components.PocListCard
+import com.aifinance.poc.core.ui.components.PocMetricTile
 import com.aifinance.poc.core.ui.theme.AppTheme
 
 
 /**
  * Design-aware screen generated from Figma ScreenIR
- * (deterministic IR→Compose path — not the generic POC list template).
+ * (deterministic IR→Compose path — uses core:ui components).
  */
 @Composable
 fun AnalyticsScreen(
@@ -74,6 +76,7 @@ fun AnalyticsScreenContent(
     state: AnalyticsScreenUiState,
     onEvent: (AnalyticsScreenUiEvent) -> Unit,
 ) {
+    val emptyMessage = "No analytics data yet"
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFF7F7F8),
@@ -149,9 +152,9 @@ fun AnalyticsScreenContent(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                MetricMiniCard("Total Spent", "8,500 PKR", "+12%", Color(0xFF16A34A), Modifier.weight(1f))
-                MetricMiniCard("Avg Daily", "1,214 PKR", "-5%", Color(0xFFDC2626), Modifier.weight(1f))
-                MetricMiniCard("Transactions", "5", "+3", Color(0xFF71717A), Modifier.weight(1f))
+                PocMetricTile(label = "Total Spent", value = "8,500 PKR", modifier = Modifier.weight(1f))
+                PocMetricTile(label = "Avg Daily", value = "1,214 PKR", modifier = Modifier.weight(1f))
+                PocMetricTile(label = "Transactions", value = "5", modifier = Modifier.weight(1f))
             }
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -191,30 +194,22 @@ fun AnalyticsScreenContent(
                 }
             }
 
+            if (state.items.isEmpty()) {
+                Text(
+                    text = emptyMessage,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            } else {
+                state.items.take(3).forEach { item ->
+                    PocListCard(
+                        title = item.title,
+                        subtitle = item.subtitle,
+                        compact = true,
+                    )
+                }
+            }
             Spacer(modifier = Modifier.height(24.dp))
-        }
-    }
-}
-
-
-@Composable
-private fun MetricMiniCard(
-    label: String,
-    value: String,
-    delta: String,
-    deltaColor: Color,
-    modifier: Modifier = Modifier,
-) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-    ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = Color(0xFF71717A))
-            Text(value, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 6.dp))
-            Text(delta, color = deltaColor, style = MaterialTheme.typography.labelSmall)
         }
     }
 }
@@ -226,7 +221,7 @@ private fun AnalyticsScreenPreview() {
         AnalyticsScreenContent(
             state = AnalyticsScreenUiState(
                 title = "Analytics",
-                subtitle = "POC Analytics screen",
+                subtitle = "Review spending summary and tap to filter by category or open Add Expense",
             ),
             onEvent = {},
         )

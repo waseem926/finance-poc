@@ -1,9 +1,9 @@
 {
-  "app_name": "Splash Expenses POC",
+  "app_name": "AI Finance POC",
   "package_name": "com.aifinance.poc",
-  "description": "Runnable Compose POC generated from your brief (3 screen(s): splash, expenses, analytics).",
-  "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/poc",
-  "requirements": "AI Finance App with Splash Screen for 3 sec , Add Expenses Screen  , Analytics Screen , History Screen and navigation in them",
+  "description": "A two-screen expense POC: capture new spending on Add Expense and review totals and trends on Analytics, with Navigation Compose routes and tap handlers for submit, category pick, and chart or list drill-down. Uses local fake transactions aligned with the AI Personal Expense Assistant Figma flow.",
+  "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/AI-Personal-Expense-Assistant?node-id=0-1&p=f&t=BXhIL10A7On3kmp3-0",
+  "requirements": "Ai Finance App with AddExpense Screen , Analytics Screen and proper navigation in these two also handle click listeners as well",
   "design": {
     "primary": "#8B5CF6",
     "on_primary": "#FFFFFF",
@@ -21,94 +21,92 @@
     {
       "path": "app",
       "type": "app",
-      "purpose": "Shell + navigation"
+      "purpose": "Hilt application, NavHost, bottom or top-level graph linking Add Expense and Analytics"
     },
     {
       "path": "core/common",
       "type": "core",
-      "purpose": "Shared primitives"
+      "purpose": "Result types, dispatchers, date and money formatting"
+    },
+    {
+      "path": "core/network",
+      "type": "core",
+      "purpose": "Retrofit-ready stubs for future AI categorization API"
+    },
+    {
+      "path": "core/database",
+      "type": "core",
+      "purpose": "Room-ready placeholder; POC uses in-memory local source"
     },
     {
       "path": "core/ui",
       "type": "core",
-      "purpose": "Design system"
+      "purpose": "Material 3 theme, spacing, ExpenseAmountField, CategoryChipRow, SummaryCard"
     },
     {
-      "path": "features/splash",
+      "path": "features/add_expense",
       "type": "feature",
-      "purpose": "Splash screen from brief"
-    },
-    {
-      "path": "features/expenses",
-      "type": "feature",
-      "purpose": "Expenses screen from brief"
+      "purpose": "Expense entry form and save flow"
     },
     {
       "path": "features/analytics",
       "type": "feature",
-      "purpose": "Analytics screen from brief"
+      "purpose": "Spending analytics and category breakdown"
     }
   ],
   "features": [
     {
-      "name": "splash",
-      "description": "Splash screen from brief",
+      "name": "add_expense",
+      "description": "User enters amount, category, note, and date; Save persists locally and navigates or shows success; category chips and View Analytics link handle clicks.",
       "screens": [
         {
-          "name": "SplashScreen",
-          "route": "splash",
-          "title": "Splash",
-          "purpose": "POC Splash screen",
+          "name": "AddExpenseScreen",
+          "route": "add_expense",
+          "title": "Add Expense",
+          "purpose": "Create a new expense and optionally open Analytics after save",
           "sample_items": [
-            "App logo",
-            "Loading…",
-            "Continue"
+            "Groceries · PKR 2,450 · Today",
+            "Fuel · PKR 1,200 · Yesterday",
+            "Subscription · PKR 799 · Netflix"
           ],
-          "ui_state": {},
-          "events": []
+          "ui_state": {
+            "isLoading": "Boolean",
+            "amountInput": "String",
+            "selectedCategoryId": "String?",
+            "categories": "List<ExpenseCategory>",
+            "note": "String",
+            "errorMessage": "String?",
+            "saveSuccess": "Boolean"
+          },
+          "events": [
+            "OnAmountChange",
+            "OnCategoryClick",
+            "OnNoteChange",
+            "OnSaveClick",
+            "OnViewAnalyticsClick"
+          ]
         }
       ],
       "use_cases": [
         {
-          "name": "ObserveSplashUseCase",
-          "description": "Load data for splash",
+          "name": "GetExpenseCategoriesUseCase",
+          "description": "Load selectable categories for chips",
           "inputs": [],
-          "output": "Flow<Result<List<String>>>"
-        }
-      ],
-      "repository": "SplashRepository",
-      "data_sources": [
-        "local"
-      ],
-      "dependencies": []
-    },
-    {
-      "name": "expenses",
-      "description": "Expenses screen from brief",
-      "screens": [
+          "output": "Flow<List<ExpenseCategory>>"
+        },
         {
-          "name": "ExpensesScreen",
-          "route": "expenses",
-          "title": "Expenses",
-          "purpose": "POC Expenses screen",
-          "sample_items": [
-            "Expenses item 1",
-            "Expenses item 2",
-            "Expenses item 3"
+          "name": "AddExpenseUseCase",
+          "description": "Validate and persist a new expense",
+          "inputs": [
+            "amount",
+            "categoryId",
+            "note",
+            "date"
           ],
-          "ui_state": {},
-          "events": []
+          "output": "Result<Expense>"
         }
       ],
-      "use_cases": [
-        {
-          "name": "ObserveExpensesUseCase",
-          "description": "Load data for expenses",
-          "inputs": [],
-          "output": "Flow<Result<List<String>>>"
-        }
-      ],
-      "repository": "ExpensesRepository",
+      "repository": "ExpenseRepository",
       "data_sources": [
         "local"
       ],
@@ -116,43 +114,70 @@
     },
     {
       "name": "analytics",
-      "description": "Analytics screen from brief",
+      "description": "Shows month total, category breakdown, and recent expenses; period and category row clicks filter or highlight slices.",
       "screens": [
         {
           "name": "AnalyticsScreen",
           "route": "analytics",
           "title": "Analytics",
-          "purpose": "POC Analytics screen",
+          "purpose": "Review spending summary and tap to filter by category or open Add Expense",
           "sample_items": [
-            "Analytics item 1",
-            "Analytics item 2",
-            "Analytics item 3"
+            "This month · PKR 18,320 total",
+            "Food 38% · Transport 22% · Bills 18%",
+            "Top: Groceries PKR 6,940"
           ],
-          "ui_state": {},
-          "events": []
+          "ui_state": {
+            "isLoading": "Boolean",
+            "periodLabel": "String",
+            "totalAmount": "Money",
+            "categoryBreakdown": "List<CategorySpend>",
+            "recentExpenses": "List<Expense>",
+            "selectedCategoryId": "String?",
+            "errorMessage": "String?"
+          },
+          "events": [
+            "Refresh",
+            "OnPeriodClick",
+            "OnCategoryBreakdownClick",
+            "OnExpenseRowClick",
+            "OnAddExpenseClick"
+          ]
         }
       ],
       "use_cases": [
         {
-          "name": "ObserveAnalyticsUseCase",
-          "description": "Load data for analytics",
-          "inputs": [],
-          "output": "Flow<Result<List<String>>>"
+          "name": "ObserveExpenseAnalyticsUseCase",
+          "description": "Aggregate totals and percentages for the selected period",
+          "inputs": [
+            "period"
+          ],
+          "output": "Flow<Result<ExpenseAnalytics>>"
+        },
+        {
+          "name": "ObserveRecentExpensesUseCase",
+          "description": "Stream latest expenses for the list section",
+          "inputs": [
+            "limit"
+          ],
+          "output": "Flow<List<Expense>>"
         }
       ],
-      "repository": "AnalyticsRepository",
+      "repository": "ExpenseRepository",
       "data_sources": [
         "local"
       ],
-      "dependencies": []
+      "dependencies": [
+        "add_expense"
+      ]
     }
   ],
   "tech_decisions": {
     "di": "Hilt",
+    "network": "Retrofit+OkHttp",
+    "db": "Room",
     "ui": "Jetpack Compose+Material3",
     "navigation": "Navigation Compose",
-    "async": "Coroutines+StateFlow",
-    "planning": "brief-driven (no LLM)"
+    "async": "Coroutines+StateFlow"
   },
   "data_flow_mermaid": "flowchart LR\n  UI-->VM\n  VM-->UC\n  UC-->Repo\n  Repo-->Local",
   "optional_libraries": [],
