@@ -1,18 +1,20 @@
-# POC Architecture — AI Finance POC
+# POC Architecture — AI Personal Expense Assistant
 
-A two-screen expense POC: capture new spending on Add Expense and review totals and trends on Analytics, with Navigation Compose routes and tap handlers for submit, category pick, and chart or list drill-down. Uses local fake transactions aligned with the AI Personal Expense Assistant Figma flow.
+Wire existing screens into bottom navigation: add_expense, analytics, history
 
 **Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/AI-Personal-Expense-Assistant?node-id=0-1&p=f&t=BXhIL10A7On3kmp3-0
 
-**Requirements:** Ai Finance App with AddExpense Screen , Analytics Screen and proper navigation in these two also handle click listeners as well
+**Requirements:** add expenses to the bottom navigation
 
 
 ## Screens (executed)
 
 
-- **Add Expense** (`add_expense`) — User enters amount, category, note, and date; Save persists locally and navigates or shows success; category chips and View Analytics link handle clicks.
+- **AddExpense** (`add_expense`) — Existing host feature: add_expense
 
-- **Analytics** (`analytics`) — Shows month total, category breakdown, and recent expenses; period and category row clicks filter or highlight slices.
+- **Analytics** (`analytics`) — Existing host feature: analytics
+
+- **History** (`history`) — Existing host feature: history
 
 
 ## Design system (V3)
@@ -27,19 +29,11 @@ Shared components live in `core:ui` (`PocTopBar`, `PocListCard`, loading/empty/e
 ## Modules
 
 
-- `app` (app) — Hilt application, NavHost, bottom or top-level graph linking Add Expense and Analytics
+- `features/add_expense` (feature) — Existing host feature: add_expense
 
-- `core/common` (core) — Result types, dispatchers, date and money formatting
+- `features/analytics` (feature) — Existing host feature: analytics
 
-- `core/network` (core) — Retrofit-ready stubs for future AI categorization API
-
-- `core/database` (core) — Room-ready placeholder; POC uses in-memory local source
-
-- `core/ui` (core) — Material 3 theme, spacing, ExpenseAmountField, CategoryChipRow, SummaryCard
-
-- `features/add_expense` (feature) — Expense entry form and save flow
-
-- `features/analytics` (feature) — Spending analytics and category breakdown
+- `features/history` (feature) — Existing host feature: history
 
 
 ## Data flow
@@ -66,3 +60,9 @@ flowchart LR
 - **navigation:** Navigation Compose
 
 - **async:** Coroutines+StateFlow
+
+- **generation_mode:** wire existing screens into bottom nav
+
+- **host_compat:** Compose + Hilt detected — full integrate
+
+- **skipped_existing_features:** home, expenses

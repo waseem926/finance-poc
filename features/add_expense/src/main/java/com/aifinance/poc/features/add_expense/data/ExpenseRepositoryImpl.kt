@@ -19,18 +19,18 @@ class ExpenseRepositoryImpl @Inject constructor() : ExpenseRepository {
         val dtos = listOf(
             AddExpenseItemDto(
                 id = "1",
-                title = "Groceries · PKR 2,450 · Today",
-                subtitle = "Add Expense · sample 1",
+                title = "Food & Dining",
+                subtitle = "Add expense · sample 1",
             ),
             AddExpenseItemDto(
                 id = "2",
-                title = "Fuel · PKR 1,200 · Yesterday",
-                subtitle = "Add Expense · sample 2",
+                title = "Transport",
+                subtitle = "Add expense · sample 2",
             ),
             AddExpenseItemDto(
                 id = "3",
-                title = "Subscription · PKR 799 · Netflix",
-                subtitle = "Add Expense · sample 3",
+                title = "Bills & Utilities",
+                subtitle = "Add expense · sample 3",
             ),
         )
         emit(Result.success(dtos.toDomain()))

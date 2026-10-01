@@ -16,6 +16,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "com.aifinance.poc.AndieHiltTestRunner"
     }
     buildTypes {
         release {
@@ -39,12 +40,15 @@ android {
 }
 
 dependencies {
+    // --- Android Architect Agent POC deps ---
+
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
     implementation(project(":features:add_expense"))
     implementation(project(":features:analytics"))
+    implementation(project(":features:history"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,4 +65,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     ksp(libs.hilt.compiler)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

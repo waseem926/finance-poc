@@ -96,31 +96,31 @@ fun AddExpenseScreenContent(
         ) {
 
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top,
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Add Expense",
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Text(
-                        text = state.subtitle.ifBlank { "Type naturally or use voice" },
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-                }
-                Icon(
-                    imageVector = Icons.Outlined.DarkMode,
-                    contentDescription = "Theme",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Top,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Add Expense",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Text(
+                    text = state.subtitle.ifBlank { "Type naturally or use voice" },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp),
                 )
             }
+            Icon(
+                imageVector = Icons.Outlined.DarkMode,
+                contentDescription = "Theme",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
 
             PocListCard(
                 title = "Recent",
@@ -133,10 +133,7 @@ fun AddExpenseScreenContent(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFEEEEF0)),
                 elevation = CardDefaults.cardElevation(0.dp),
             ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     OutlinedTextField(
                         value = "500 for groceries",
                         onValueChange = {},
@@ -157,113 +154,113 @@ fun AddExpenseScreenContent(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontWeight = FontWeight.SemiBold,
                     )
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF3E8FF), RoundedCornerShape(16.dp))
-                                .border(1.5.dp, Color(0xFFA855F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "🍔", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Food",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "🚗", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Transport",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "💡", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Bills",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                    }
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "🛍️", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Shopping",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "🎬", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Entertainment",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp)
-                                .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
-                                .clickable { }
-                                .padding(vertical = 12.dp, horizontal = 8.dp),
-                        ) {
-                            Text(text = "🛒", style = MaterialTheme.typography.headlineSmall)
-                            Text(
-                                text = "Groceries",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF717182),
-                                modifier = Modifier.padding(top = 6.dp),
-                            )
-                        }
-                    }
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF3E8FF), RoundedCornerShape(16.dp))
+                        .border(1.5.dp, Color(0xFFA855F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "🍔", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Food",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "🚗", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Transport",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "💡", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Bills",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+            }
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "🛍️", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Shopping",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "🎬", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Entertainment",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
+                        .background(Color(0xFFF5F5F7), RoundedCornerShape(16.dp))
+                        .clickable { }
+                        .padding(vertical = 12.dp, horizontal = 8.dp),
+                ) {
+                    Text(text = "🛒", style = MaterialTheme.typography.headlineSmall)
+                    Text(
+                        text = "Groceries",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF717182),
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
+            }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -281,16 +278,16 @@ fun AddExpenseScreenContent(
                             ),
                         ) {
                             Icon(
-                                imageVector = Icons.Outlined.Add,
-                                contentDescription = "Add",
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
+                imageVector = Icons.Outlined.Add,
+                contentDescription = "Add",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text("Add Expense", fontWeight = FontWeight.SemiBold)
                         }
-                    }
-                }
-            }
-        }
-    }
+}
+}
+}
+}
+}
 }

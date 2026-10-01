@@ -37,8 +37,11 @@ private val AppShapes = Shapes(
 
 /** Root Material 3 theme driven by design tokens. */
 @Composable
-fun AppTheme(content: @Composable () -> Unit) {
-    val dark = isSystemInDarkTheme()
+fun AppTheme(
+    darkTheme: Boolean? = null,
+    content: @Composable () -> Unit,
+) {
+    val dark = darkTheme ?: isSystemInDarkTheme()
     MaterialTheme(
         colorScheme = if (dark) DarkColors else LightColors,
         typography = AppTypography,

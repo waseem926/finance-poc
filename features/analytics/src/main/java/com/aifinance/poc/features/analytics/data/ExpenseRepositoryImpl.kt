@@ -19,18 +19,18 @@ class ExpenseRepositoryImpl @Inject constructor() : ExpenseRepository {
         val dtos = listOf(
             AnalyticsItemDto(
                 id = "1",
-                title = "This month · PKR 18,320 total",
+                title = "Food & Dining · 32% · $412",
                 subtitle = "Analytics · sample 1",
             ),
             AnalyticsItemDto(
                 id = "2",
-                title = "Food 38% · Transport 22% · Bills 18%",
+                title = "Transport · 18% · $231",
                 subtitle = "Analytics · sample 2",
             ),
             AnalyticsItemDto(
                 id = "3",
-                title = "Top",
-                subtitle = "Groceries PKR 6,940",
+                title = "Shopping · 15% · $193",
+                subtitle = "Analytics · sample 3",
             ),
         )
         emit(Result.success(dtos.toDomain()))

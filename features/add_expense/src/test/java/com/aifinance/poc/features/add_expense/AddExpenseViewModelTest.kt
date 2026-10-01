@@ -2,7 +2,7 @@ package com.aifinance.poc.features.add_expense
 
 import app.cash.turbine.test
 import com.aifinance.poc.features.add_expense.domain.AddExpenseItem
-import com.aifinance.poc.features.add_expense.domain.GetExpenseCategoriesUseCase
+import com.aifinance.poc.features.add_expense.domain.ObserveExpenseCategoriesUseCase
 import com.aifinance.poc.features.add_expense.presentation.AddExpenseScreenUiEvent
 import com.aifinance.poc.features.add_expense.presentation.AddExpenseViewModel
 import io.mockk.every
@@ -37,7 +37,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `refresh loads domain items into ui state`() = runTest {
-        val useCase = mockk<GetExpenseCategoriesUseCase>()
+        val useCase = mockk<ObserveExpenseCategoriesUseCase>()
         every { useCase() } returns flowOf(
             Result.success(
                 listOf(AddExpenseItem(id = "1", title = "Coffee", subtitle = "$4.50")),
@@ -57,7 +57,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `refresh event reloads`() = runTest {
-        val useCase = mockk<GetExpenseCategoriesUseCase>()
+        val useCase = mockk<ObserveExpenseCategoriesUseCase>()
         every { useCase() } returns flowOf(Result.success(emptyList()))
         val viewModel = AddExpenseViewModel(useCase)
         viewModel.onEvent(AddExpenseScreenUiEvent.Refresh)

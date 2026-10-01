@@ -1,9 +1,9 @@
 {
-  "app_name": "AI Finance POC",
+  "app_name": "AI Personal Expense Assistant",
   "package_name": "com.aifinance.poc",
-  "description": "A two-screen expense POC: capture new spending on Add Expense and review totals and trends on Analytics, with Navigation Compose routes and tap handlers for submit, category pick, and chart or list drill-down. Uses local fake transactions aligned with the AI Personal Expense Assistant Figma flow.",
+  "description": "Wire existing screens into bottom navigation: add_expense, analytics, history",
   "figma_url": "https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/AI-Personal-Expense-Assistant?node-id=0-1&p=f&t=BXhIL10A7On3kmp3-0",
-  "requirements": "Ai Finance App with AddExpense Screen , Analytics Screen and proper navigation in these two also handle click listeners as well",
+  "requirements": "add expenses to the bottom navigation",
   "design": {
     "primary": "#8B5CF6",
     "on_primary": "#FFFFFF",
@@ -19,94 +19,49 @@
   },
   "modules": [
     {
-      "path": "app",
-      "type": "app",
-      "purpose": "Hilt application, NavHost, bottom or top-level graph linking Add Expense and Analytics"
-    },
-    {
-      "path": "core/common",
-      "type": "core",
-      "purpose": "Result types, dispatchers, date and money formatting"
-    },
-    {
-      "path": "core/network",
-      "type": "core",
-      "purpose": "Retrofit-ready stubs for future AI categorization API"
-    },
-    {
-      "path": "core/database",
-      "type": "core",
-      "purpose": "Room-ready placeholder; POC uses in-memory local source"
-    },
-    {
-      "path": "core/ui",
-      "type": "core",
-      "purpose": "Material 3 theme, spacing, ExpenseAmountField, CategoryChipRow, SummaryCard"
-    },
-    {
       "path": "features/add_expense",
       "type": "feature",
-      "purpose": "Expense entry form and save flow"
+      "purpose": "Existing host feature: add_expense"
     },
     {
       "path": "features/analytics",
       "type": "feature",
-      "purpose": "Spending analytics and category breakdown"
+      "purpose": "Existing host feature: analytics"
+    },
+    {
+      "path": "features/history",
+      "type": "feature",
+      "purpose": "Existing host feature: history"
     }
   ],
   "features": [
     {
       "name": "add_expense",
-      "description": "User enters amount, category, note, and date; Save persists locally and navigates or shows success; category chips and View Analytics link handle clicks.",
+      "description": "Existing host feature: add_expense",
       "screens": [
         {
           "name": "AddExpenseScreen",
           "route": "add_expense",
-          "title": "Add Expense",
-          "purpose": "Create a new expense and optionally open Analytics after save",
+          "title": "AddExpense",
+          "purpose": "Show AddExpense in app navigation",
           "sample_items": [
-            "Groceries · PKR 2,450 · Today",
-            "Fuel · PKR 1,200 · Yesterday",
-            "Subscription · PKR 799 · Netflix"
+            "AddExpense item 1",
+            "AddExpense item 2",
+            "AddExpense item 3"
           ],
-          "ui_state": {
-            "isLoading": "Boolean",
-            "amountInput": "String",
-            "selectedCategoryId": "String?",
-            "categories": "List<ExpenseCategory>",
-            "note": "String",
-            "errorMessage": "String?",
-            "saveSuccess": "Boolean"
-          },
-          "events": [
-            "OnAmountChange",
-            "OnCategoryClick",
-            "OnNoteChange",
-            "OnSaveClick",
-            "OnViewAnalyticsClick"
-          ]
+          "ui_state": {},
+          "events": []
         }
       ],
       "use_cases": [
         {
-          "name": "GetExpenseCategoriesUseCase",
-          "description": "Load selectable categories for chips",
+          "name": "ObserveAddExpenseUseCase",
+          "description": "Load data for add_expense",
           "inputs": [],
-          "output": "Flow<List<ExpenseCategory>>"
-        },
-        {
-          "name": "AddExpenseUseCase",
-          "description": "Validate and persist a new expense",
-          "inputs": [
-            "amount",
-            "categoryId",
-            "note",
-            "date"
-          ],
-          "output": "Result<Expense>"
+          "output": "Flow<Result<List<String>>>"
         }
       ],
-      "repository": "ExpenseRepository",
+      "repository": "AddExpenseRepository",
       "data_sources": [
         "local"
       ],
@@ -114,61 +69,67 @@
     },
     {
       "name": "analytics",
-      "description": "Shows month total, category breakdown, and recent expenses; period and category row clicks filter or highlight slices.",
+      "description": "Existing host feature: analytics",
       "screens": [
         {
           "name": "AnalyticsScreen",
           "route": "analytics",
           "title": "Analytics",
-          "purpose": "Review spending summary and tap to filter by category or open Add Expense",
+          "purpose": "Show Analytics in app navigation",
           "sample_items": [
-            "This month · PKR 18,320 total",
-            "Food 38% · Transport 22% · Bills 18%",
-            "Top: Groceries PKR 6,940"
+            "Analytics item 1",
+            "Analytics item 2",
+            "Analytics item 3"
           ],
-          "ui_state": {
-            "isLoading": "Boolean",
-            "periodLabel": "String",
-            "totalAmount": "Money",
-            "categoryBreakdown": "List<CategorySpend>",
-            "recentExpenses": "List<Expense>",
-            "selectedCategoryId": "String?",
-            "errorMessage": "String?"
-          },
-          "events": [
-            "Refresh",
-            "OnPeriodClick",
-            "OnCategoryBreakdownClick",
-            "OnExpenseRowClick",
-            "OnAddExpenseClick"
-          ]
+          "ui_state": {},
+          "events": []
         }
       ],
       "use_cases": [
         {
-          "name": "ObserveExpenseAnalyticsUseCase",
-          "description": "Aggregate totals and percentages for the selected period",
-          "inputs": [
-            "period"
-          ],
-          "output": "Flow<Result<ExpenseAnalytics>>"
-        },
-        {
-          "name": "ObserveRecentExpensesUseCase",
-          "description": "Stream latest expenses for the list section",
-          "inputs": [
-            "limit"
-          ],
-          "output": "Flow<List<Expense>>"
+          "name": "ObserveAnalyticsUseCase",
+          "description": "Load data for analytics",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
         }
       ],
-      "repository": "ExpenseRepository",
+      "repository": "AnalyticsRepository",
       "data_sources": [
         "local"
       ],
-      "dependencies": [
-        "add_expense"
-      ]
+      "dependencies": []
+    },
+    {
+      "name": "history",
+      "description": "Existing host feature: history",
+      "screens": [
+        {
+          "name": "HistoryScreen",
+          "route": "history",
+          "title": "History",
+          "purpose": "Show History in app navigation",
+          "sample_items": [
+            "History item 1",
+            "History item 2",
+            "History item 3"
+          ],
+          "ui_state": {},
+          "events": []
+        }
+      ],
+      "use_cases": [
+        {
+          "name": "ObserveHistoryUseCase",
+          "description": "Load data for history",
+          "inputs": [],
+          "output": "Flow<Result<List<String>>>"
+        }
+      ],
+      "repository": "HistoryRepository",
+      "data_sources": [
+        "local"
+      ],
+      "dependencies": []
     }
   ],
   "tech_decisions": {
@@ -177,26 +138,41 @@
     "db": "Room",
     "ui": "Jetpack Compose+Material3",
     "navigation": "Navigation Compose",
-    "async": "Coroutines+StateFlow"
+    "async": "Coroutines+StateFlow",
+    "generation_mode": "wire existing screens into bottom nav",
+    "host_compat": "Compose + Hilt detected — full integrate",
+    "skipped_existing_features": "home, expenses"
   },
   "data_flow_mermaid": "flowchart LR\n  UI-->VM\n  VM-->UC\n  UC-->Repo\n  Repo-->Local",
   "optional_libraries": [],
   "integration": {
-    "mode": "greenfield",
-    "host_root": "",
+    "mode": "integrate",
+    "host_root": "D:\\AIProjects",
     "app_module": "app",
     "compat": "green",
-    "compat_label": "",
+    "compat_label": "Compose + Hilt detected — full integrate",
     "create_core_common": false,
     "create_core_ui": false,
     "create_version_catalog": false,
     "patch_settings": false,
     "patch_app_deps": false,
     "write_poc_entry": false,
-    "wire_nav_only": false,
-    "conflict_features": [],
+    "wire_nav_only": true,
+    "removed_features": [],
+    "conflict_features": [
+      "home",
+      "expenses"
+    ],
+    "ux_patches": [],
     "files_to_create": [],
-    "files_to_patch": [],
-    "notes": []
+    "files_to_patch": [
+      "app/…/navigation/AppNavHost.kt (if present)",
+      "app/…/poc/PocNavHost.kt",
+      "docs/POC_INTEGRATION.md"
+    ],
+    "notes": [
+      "Nav wire — bottom navigation set to: add_expense, analytics, history",
+      "MainActivity shell kept; AppNavHost / PocNavHost updated."
+    ]
   }
 }

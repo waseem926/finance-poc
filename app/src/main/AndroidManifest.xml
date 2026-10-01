@@ -19,5 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+    
+        <!-- Android Architect Agent POC entry -->
+        <activity
+            android:name=".poc.PocEntryActivity"
+            android:exported="true"
+            android:label="POC" />
     </application>
 </manifest>

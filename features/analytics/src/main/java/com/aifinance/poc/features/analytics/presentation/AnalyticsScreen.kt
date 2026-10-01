@@ -221,7 +221,7 @@ private fun AnalyticsScreenPreview() {
         AnalyticsScreenContent(
             state = AnalyticsScreenUiState(
                 title = "Analytics",
-                subtitle = "Review spending summary and tap to filter by category or open Add Expense",
+                subtitle = "View spending by category and period comparison",
             ),
             onEvent = {},
         )

@@ -21,4 +21,7 @@ include(
     ":core:ui",
     ":features:add_expense",
     ":features:analytics",
+    ":features:history",
 )
+
+// --- Android Architect Agent POC modules ---

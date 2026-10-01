@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import com.aifinance.poc.features.analytics.domain.ObserveExpenseAnalyticsUseCase
+import com.aifinance.poc.features.analytics.domain.ObserveSpendingAnalyticsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  */
 @HiltViewModel
 class AnalyticsViewModel @Inject constructor(
-    private val observeItems: ObserveExpenseAnalyticsUseCase,
+    private val observeItems: ObserveSpendingAnalyticsUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AnalyticsScreenUiState(isLoading = true))

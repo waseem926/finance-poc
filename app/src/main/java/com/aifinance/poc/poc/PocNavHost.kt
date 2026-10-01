@@ -1,0 +1,100 @@
+package com.aifinance.poc.poc
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.delay
+import com.aifinance.poc.features.add_expense.presentation.AddExpenseScreen
+import com.aifinance.poc.features.analytics.presentation.AnalyticsScreen
+import com.aifinance.poc.features.history.presentation.HistoryScreen
+import com.aifinance.poc.core.ui.theme.AppTheme
+
+private data class Dest(val route: String, val label: String, val icon: ImageVector)
+
+/**
+ * Isolated POC navigation host — splash is launch-only (timed), not a bottom-nav tab.
+ */
+@Composable
+fun PocNavHost() {
+    AppTheme {
+        val navController = rememberNavController()
+        val tabDestinations = listOf(
+            Dest("add_expense", "AddExpense", Icons.Default.Home),
+            Dest("analytics", "Analytics", Icons.Default.List),
+            Dest("history", "History", Icons.Default.Star),
+        )
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        val showBottomBar = tabDestinations.size > 1 && currentRoute != ""
+
+        Scaffold(
+            bottomBar = {
+                if (showBottomBar) {
+                    NavigationBar {
+                        tabDestinations.forEach { dest ->
+                            NavigationBarItem(
+                                modifier = Modifier.testTag("andie_nav_${dest.route}"),
+                                selected = navBackStackEntry?.destination?.hierarchy?.any { it.route == dest.route } == true,
+                                onClick = {
+                                    navController.navigate(dest.route) {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                },
+                                icon = { Icon(dest.icon, contentDescription = dest.label) },
+                                label = { Text(dest.label) },
+                            )
+                        }
+                    }
+                }
+            },
+        ) { padding ->
+            NavHost(
+                navController = navController,
+                startDestination = "add_expense",
+                modifier = Modifier.padding(padding),
+            ) {
+                composable(route = "add_expense") {
+                    Box(Modifier.fillMaxSize().testTag("andie_screen_add_expense")) {
+                        AddExpenseScreen()
+                    }
+                }
+                composable(route = "analytics") {
+                    Box(Modifier.fillMaxSize().testTag("andie_screen_analytics")) {
+                        AnalyticsScreen()
+                    }
+                }
+                composable(route = "history") {
+                    Box(Modifier.fillMaxSize().testTag("andie_screen_history")) {
+                        HistoryScreen()
+                    }
+                }
+            }
+        }
+    }
+}

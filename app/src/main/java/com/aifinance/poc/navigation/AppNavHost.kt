@@ -1,5 +1,7 @@
 package com.aifinance.poc.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -16,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -25,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import com.aifinance.poc.features.add_expense.presentation.AddExpenseScreen
 import com.aifinance.poc.features.analytics.presentation.AnalyticsScreen
+import com.aifinance.poc.features.history.presentation.HistoryScreen
 
 private data class Dest(val route: String, val label: String, val icon: ImageVector)
 
@@ -33,8 +37,9 @@ private data class Dest(val route: String, val label: String, val icon: ImageVec
 fun AppNavHost() {
     val navController = rememberNavController()
     val tabDestinations = listOf(
-        Dest("add_expense", "Add Expense", Icons.Default.Home),
+        Dest("add_expense", "AddExpense", Icons.Default.Home),
         Dest("analytics", "Analytics", Icons.Default.List),
+        Dest("history", "History", Icons.Default.Star),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -46,6 +51,7 @@ fun AppNavHost() {
                 NavigationBar {
                     tabDestinations.forEach { dest ->
                         NavigationBarItem(
+                            modifier = Modifier.testTag("andie_nav_${dest.route}"),
                             selected = navBackStackEntry?.destination?.hierarchy?.any { it.route == dest.route } == true,
                             onClick = {
                                 navController.navigate(dest.route) {
@@ -69,8 +75,21 @@ fun AppNavHost() {
             startDestination = "add_expense",
             modifier = Modifier.padding(padding),
         ) {
-            composable(route = "add_expense") { AddExpenseScreen() }
-            composable(route = "analytics") { AnalyticsScreen() }
+            composable(route = "add_expense") {
+                Box(Modifier.fillMaxSize().testTag("andie_screen_add_expense")) {
+                    AddExpenseScreen()
+                }
+            }
+            composable(route = "analytics") {
+                Box(Modifier.fillMaxSize().testTag("andie_screen_analytics")) {
+                    AnalyticsScreen()
+                }
+            }
+            composable(route = "history") {
+                Box(Modifier.fillMaxSize().testTag("andie_screen_history")) {
+                    HistoryScreen()
+                }
+            }
         }
     }
 }
