@@ -26,9 +26,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
-import com.aifinance.poc.features.add_expense.presentation.AddExpenseScreen
+import com.aifinance.poc.features.addexpense.presentation.AddExpenseScreen
 import com.aifinance.poc.features.analytics.presentation.AnalyticsScreen
-import com.aifinance.poc.features.history.presentation.HistoryScreen
 
 private data class Dest(val route: String, val label: String, val icon: ImageVector)
 
@@ -37,9 +36,8 @@ private data class Dest(val route: String, val label: String, val icon: ImageVec
 fun AppNavHost() {
     val navController = rememberNavController()
     val tabDestinations = listOf(
-        Dest("add_expense", "AddExpense", Icons.Default.Home),
+        Dest("addexpense", "Add Expense", Icons.Default.Home),
         Dest("analytics", "Analytics", Icons.Default.List),
-        Dest("history", "History", Icons.Default.Star),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -72,22 +70,17 @@ fun AppNavHost() {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = "add_expense",
+            startDestination = "addexpense",
             modifier = Modifier.padding(padding),
         ) {
-            composable(route = "add_expense") {
-                Box(Modifier.fillMaxSize().testTag("andie_screen_add_expense")) {
+            composable(route = "addexpense") {
+                Box(Modifier.fillMaxSize().testTag("andie_screen_addexpense")) {
                     AddExpenseScreen()
                 }
             }
             composable(route = "analytics") {
                 Box(Modifier.fillMaxSize().testTag("andie_screen_analytics")) {
                     AnalyticsScreen()
-                }
-            }
-            composable(route = "history") {
-                Box(Modifier.fillMaxSize().testTag("andie_screen_history")) {
-                    HistoryScreen()
                 }
             }
         }

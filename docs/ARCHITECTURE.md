@@ -1,20 +1,18 @@
-# POC Architecture — AI Personal Expense Assistant
+# POC Architecture — AI Finance POC
 
-Wire existing screens into bottom navigation: add_expense, analytics, history
+A two-screen expense POC: capture new expenses on Add Expense and review spending summaries on Analytics, with Navigation Compose moving between both. Local fake expense data only; Figma informs layout and tokens.
 
 **Figma:** https://www.figma.com/design/Ysn4BBvXbVvpBmmMC7nxBz/AI-Personal-Expense-Assistant?node-id=0-1&p=f&t=BXhIL10A7On3kmp3-0
 
-**Requirements:** add expenses to the bottom navigation
+**Requirements:** AI Finance app with Add Expense Screen and Analytics Screen and navigation in these screen
 
 
 ## Screens (executed)
 
 
-- **AddExpense** (`add_expense`) — Existing host feature: add_expense
+- **Add Expense** (`addexpense`) — Form to enter amount, category, note, and date; saves to local store and refreshes analytics source.
 
-- **Analytics** (`analytics`) — Existing host feature: analytics
-
-- **History** (`history`) — Existing host feature: history
+- **Analytics** (`analytics`) — Dashboard of totals, category breakdown, and recent transactions from local expenses.
 
 
 ## Design system (V3)
@@ -29,11 +27,19 @@ Shared components live in `core:ui` (`PocTopBar`, `PocListCard`, loading/empty/e
 ## Modules
 
 
-- `features/add_expense` (feature) — Existing host feature: add_expense
+- `app` (app) — Application shell, NavHost, bottom navigation between Add Expense and Analytics
 
-- `features/analytics` (feature) — Existing host feature: analytics
+- `core/common` (core) — Shared result types, dispatchers, extensions
 
-- `features/history` (feature) — Existing host feature: history
+- `core/network` (core) — Retrofit-ready scaffolding (unused in POC)
+
+- `core/database` (core) — Room-ready scaffolding (optional in-memory/local JSON for POC)
+
+- `core/ui` (core) — Design system: colors, typography, spacing, buttons, text fields, expense list row
+
+- `features/addexpense` (feature) — Add and persist expense entries
+
+- `features/analytics` (feature) — Aggregate and display spending analytics
 
 
 ## Data flow
@@ -60,9 +66,3 @@ flowchart LR
 - **navigation:** Navigation Compose
 
 - **async:** Coroutines+StateFlow
-
-- **generation_mode:** wire existing screens into bottom nav
-
-- **host_compat:** Compose + Hilt detected — full integrate
-
-- **skipped_existing_features:** home, expenses

@@ -40,15 +40,12 @@ android {
 }
 
 dependencies {
-    // --- Android Architect Agent POC deps ---
-
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
-    implementation(project(":features:add_expense"))
+    implementation(project(":features:addexpense"))
     implementation(project(":features:analytics"))
-    implementation(project(":features:history"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

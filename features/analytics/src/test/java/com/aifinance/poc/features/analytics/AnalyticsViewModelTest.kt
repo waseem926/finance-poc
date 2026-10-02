@@ -2,7 +2,7 @@ package com.aifinance.poc.features.analytics
 
 import app.cash.turbine.test
 import com.aifinance.poc.features.analytics.domain.AnalyticsItem
-import com.aifinance.poc.features.analytics.domain.ObserveSpendingAnalyticsUseCase
+import com.aifinance.poc.features.analytics.domain.ObserveExpenseAnalyticsUseCase
 import com.aifinance.poc.features.analytics.presentation.AnalyticsScreenUiEvent
 import com.aifinance.poc.features.analytics.presentation.AnalyticsViewModel
 import io.mockk.every
@@ -37,7 +37,7 @@ class AnalyticsViewModelTest {
 
     @Test
     fun `refresh loads domain items into ui state`() = runTest {
-        val useCase = mockk<ObserveSpendingAnalyticsUseCase>()
+        val useCase = mockk<ObserveExpenseAnalyticsUseCase>()
         every { useCase() } returns flowOf(
             Result.success(
                 listOf(AnalyticsItem(id = "1", title = "Coffee", subtitle = "$4.50")),
@@ -57,7 +57,7 @@ class AnalyticsViewModelTest {
 
     @Test
     fun `refresh event reloads`() = runTest {
-        val useCase = mockk<ObserveSpendingAnalyticsUseCase>()
+        val useCase = mockk<ObserveExpenseAnalyticsUseCase>()
         every { useCase() } returns flowOf(Result.success(emptyList()))
         val viewModel = AnalyticsViewModel(useCase)
         viewModel.onEvent(AnalyticsScreenUiEvent.Refresh)

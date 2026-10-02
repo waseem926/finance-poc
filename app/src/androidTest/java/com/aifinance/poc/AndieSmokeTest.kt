@@ -30,9 +30,8 @@ class AndieSmokeTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     private val tabRoutes = listOf(
-        "add_expense",
+        "addexpense",
         "analytics",
-        "history",
     )
 
     /** Stable tags stamped by Andie IR / theme chrome. */

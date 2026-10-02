@@ -6,7 +6,7 @@ import com.aifinance.poc.features.analytics.domain.AnalyticsItem
 data class AnalyticsScreenUiState(
     val isLoading: Boolean = false,
     val title: String = "Analytics",
-    val subtitle: String = "View spending by category and period comparison",
+    val subtitle: String = "User reviews monthly total, category split, and recent expense list.",
     val items: List<AnalyticsItem> = emptyList(),
     val errorMessage: String? = null,
 )
